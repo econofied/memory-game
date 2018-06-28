@@ -80,6 +80,9 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
+.wait{
+    transition-delay: 2s;
+}
 
 /*
  * Styles for the Score Panel
