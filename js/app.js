@@ -3,7 +3,8 @@
  */
 
 const pics = ['fa fa-diamond','fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-bolt', 'fa fa-cube', 'fa fa-cube', 'fa fa-leaf', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-bomb'];
-
+let cardMoves = 0
+const numMoves = document.querySelector('moves');
 const table = document.querySelector('.deck');
  //   - loop through each card and create its HTML
 
@@ -42,9 +43,8 @@ function shuffle(array) {
 }
 let flippedCard = [];
 let matchedCard = [];
-const numMoves = document.getElementsByClassName('moves')
 
-let move = 0
+
 
 // set up the event listener for a card. If a card is clicked:
 table.addEventListener('click', flipCard, false);
@@ -55,14 +55,20 @@ function flipCard(evt) {
 		clickedCard.classList.add('show', 'open');
 		flippedCard.push(clickedCard);
 				
-		console.log(move)
-		//if the list already has another card, check to see if the two cards match
+			//if the list already has another card, check to see if the two cards match
 		if (flippedCard > 2){
 			firstCard.classList.remove('show', 'open');
 			secondCard.classList.remove('show', 'open');
 		}
 		const firstCard = flippedCard[0];
 		const secondCard = flippedCard[1];
+
+
+		if (firstCard && secondCard) {
+			cardMoves +=1 ;
+			numMoves.innerHTML = cardMoves;
+			
+		}
 		
 		
 		if (flippedCard.length === 2 && firstCard.innerHTML == flippedCard[1].innerHTML && 
@@ -74,7 +80,6 @@ function flipCard(evt) {
 			console.log('match!!');	
 			flippedCard = [];
 			matchedCard.push(firstCard, secondCard);
-			move +=1
 			gameWon();
 
 		}else if (flippedCard.length === 2 && firstCard.innerHTML != flippedCard[1].innerHTML){
@@ -87,10 +92,8 @@ function flipCard(evt) {
 				
 			}
 			flippedCard = [];
-			move +=1
 		}else {
 			console.log('select another');
-			move +=1
 		}
 	}
 
